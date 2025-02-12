@@ -1,7 +1,38 @@
 .container {
+  width: calc(100vw - 40px);
+  padding: 20px;
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100vh;
+
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    padding-top: 20px;
+  }
+}
+
+.movieGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+  padding: 20px 0;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #666;
+}
+
+.error {
+  text-align: center;
+  padding: 20px;
+  margin: 20px 0;
+  background-color: #fee;
+  color: #c00;
+  border-radius: 8px;
 }
