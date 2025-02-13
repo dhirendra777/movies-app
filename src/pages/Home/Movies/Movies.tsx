@@ -1,7 +1,7 @@
 import { memo, useCallback, useEffect } from 'react';
-import MovieCard from '../../../components/MovieCard/MovieCard';
+import MovieCard from '../../../components/MovieCard';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { fetchMovies, incrementPage } from '../../../store/movies/moviesSlice';
+import { fetchMovies, incrementPage } from '../../../store/movies';
 import styles from './Movies.module.scss';
 
 const Movies = memo(() => {
@@ -11,16 +11,25 @@ const Movies = memo(() => {
   const isLoading = status === 'loading';
   const hasMore = page < totalPages;
 
-  useEffect(() => {
+  const fetchMoviesList = useCallback(() => {
     dispatch(fetchMovies());
-  }, [dispatch, searchQuery]);
+  }, [dispatch]);
+
+  const nextPage = useCallback(() => {
+    dispatch(incrementPage());
+  }, [dispatch]);
 
   const handleLoadMore = useCallback(() => {
     if (!isLoading && hasMore) {
-      dispatch(incrementPage());
-      dispatch(fetchMovies());
+      nextPage();
+      fetchMoviesList();
     }
-  }, [dispatch, hasMore, isLoading]);
+  }, [isLoading, hasMore, nextPage, fetchMoviesList]);
+
+  useEffect(() => {
+    fetchMoviesList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQuery]);
 
   if (error) {
     return <div className={styles.error}>{error}</div>;

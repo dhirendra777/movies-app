@@ -1,20 +1,17 @@
-import { ChangeEvent, memo, useCallback, useEffect, useRef } from 'react';
-import { useAppDispatch } from '../../store/hooks';
-import { setSearchQuery } from '../../store/movies/moviesSlice';
+import { ChangeEvent, FC, memo, useCallback, useEffect, useRef } from 'react';
 import { debounce } from '../../utils/debounce';
 import styles from './Search.module.scss';
 
 interface SearchProps {
   placeholder?: string;
   debounceTime?: number;
+  onSearch: (searchText: string) => void;
 }
 
-const Search = memo(({ placeholder = 'Search for movies...', debounceTime = 500 }: SearchProps) => {
-  const dispatch = useAppDispatch();
-
+const Search: FC<SearchProps> = memo(({ onSearch, placeholder = 'Search for movies...', debounceTime = 500 }) => {
   const debouncedSearch = useRef(
     debounce((value: string) => {
-      dispatch(setSearchQuery(value));
+      onSearch(value);
     }, debounceTime),
   ).current;
 

@@ -1,12 +1,12 @@
 import { memo } from 'react';
 import styles from './Home.module.scss';
-import Movies from './Movies/Movies';
-import PageTitle from './PageTitle/PageTitle';
+import Movies from './Movies';
+import SearchSection from './SearchSection';
 
 const Home = memo(() => {
   return (
     <div className={styles.container}>
-      <PageTitle title="Movie App" subtitle="Discover your next favorite movie" />
+      <SearchSection title="Movie App" subtitle="Discover your next favorite movie" />
       <Movies />
     </div>
   );

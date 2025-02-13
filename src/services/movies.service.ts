@@ -1,5 +1,5 @@
-const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
-const BASE_URL = 'https://api.themoviedb.org/3';
+import { API_KEY } from '../constants/constants';
+import { BASE_URL } from '../constants/urls';
 
 interface Movie {
   id: number;

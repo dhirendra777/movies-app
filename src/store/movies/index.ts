@@ -1,23 +1,6 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { moviesService } from '../../services/movies.service';
-
-interface Movie {
-  id: number;
-  title: string;
-  poster_path: string;
-  release_date: string;
-  vote_average: number;
-  overview: string;
-}
-
-interface MoviesState {
-  items: Movie[];
-  status: 'idle' | 'loading' | 'failed';
-  error: string | null;
-  page: number;
-  totalPages: number;
-  searchQuery: string;
-}
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchMovies } from './thunk';
+import { MoviesState } from './types';
 
 const initialState: MoviesState = {
   items: [],
@@ -27,19 +10,6 @@ const initialState: MoviesState = {
   totalPages: 1,
   searchQuery: '',
 };
-
-export const fetchMovies = createAsyncThunk('movies/fetchMovies', async (_, { getState, rejectWithValue }) => {
-  const state = getState() as { movies: MoviesState };
-  const { page, searchQuery } = state.movies;
-
-  try {
-    return searchQuery
-      ? await moviesService.searchMovies(searchQuery, page)
-      : await moviesService.getPopularMovies(page);
-  } catch (error) {
-    return rejectWithValue(error instanceof Error ? error.message : 'Failed to fetch movies');
-  }
-});
 
 const moviesSlice = createSlice({
   name: 'movies',
@@ -77,5 +47,7 @@ const moviesSlice = createSlice({
   },
 });
 
-export const { setSearchQuery, resetMovies, incrementPage } = moviesSlice.actions;
-export default moviesSlice.reducer;
+const { setSearchQuery, incrementPage, resetMovies } = moviesSlice.actions;
+const moviesReducer = moviesSlice.reducer;
+
+export { fetchMovies, incrementPage, moviesReducer, moviesSlice, resetMovies, setSearchQuery };
