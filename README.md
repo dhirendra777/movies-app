@@ -1,6 +1,6 @@
 # Movies App
 
-A React application for discovering and searching movies using TMDB API.
+A React application for discovering and searching movies using the TMDB API.
 
 ## Features
 
@@ -61,6 +61,16 @@ src/
 ## Environment Variables
 
 - `VITE_TMDB_API_KEY` - TMDB API key (required)
+
+## Testing
+
+To run tests, use the following command:
+
+```bash
+npm test
+```
+
+This will execute all test cases in your project.
 
 ```
 

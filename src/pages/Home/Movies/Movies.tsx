@@ -36,12 +36,12 @@ const Movies = memo(() => {
   }
 
   if (isLoading && !movies.length) {
-    return <div className={`${styles.loading} ${styles.movieGrid}`}>Loading...</div>;
+    return <div className={`${styles.loadingText} ${styles.movieGrid}`}>Loading...</div>;
   }
 
   if (!movies.length) {
     return (
-      <div className={`${styles.noResults}`}>
+      <div className={`${styles.loadingText}`}>
         {searchQuery ? `No movies found for "${searchQuery}"` : 'No movies available'}
       </div>
     );
