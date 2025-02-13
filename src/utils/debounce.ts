@@ -4,7 +4,7 @@ type DebouncedFunction = {
 };
 
 export function debounce<F extends (value: string) => void>(func: F, wait = 500): DebouncedFunction {
-  let timeout: number | null = null;
+  let timeout: NodeJS.Timeout | null = null;
 
   const debounced = (value: string) => {
     if (timeout) {
