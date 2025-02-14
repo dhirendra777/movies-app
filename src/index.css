@@ -74,6 +74,12 @@ button:focus-visible {
   text-align: center;
 }
 
+@media (max-width: 768px) {
+  #root {
+    margin: 0;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
